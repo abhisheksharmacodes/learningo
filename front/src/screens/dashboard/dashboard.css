@@ -339,6 +339,18 @@ table tr {
     }
 }
 
+@media screen and (max-width:700px) {
+    #navigate {
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width:790px) {
+    #max-nav {
+        display: none;
+    }
+}
+
 /* @media screen and (max-width:768px) {
     #burger {
         display: block;

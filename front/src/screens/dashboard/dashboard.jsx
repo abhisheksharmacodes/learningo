@@ -355,7 +355,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         checkStatus()
-        axios.get('https://backend-tau-seven-71.vercel.app/leads').then((data) => {
+        axios.get('https://learningo-backend.vercel.app/leads').then((data) => {
             setLeaderboard(data.data)
         })
     }, [change])
@@ -398,7 +398,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         localStorage.setItem('topics', yourTopics.join(","))
-        axios.put('https://backend-tau-seven-71.vercel.app/topics/' + localStorage.getItem('id'), [yourTopics.join(",")]).then(() => {
+        axios.put('https://learningo-backend.vercel.app/topics/' + localStorage.getItem('id'), [yourTopics.join(",")]).then(() => {
             
         })
     }, [yourTopics])
@@ -444,7 +444,7 @@ const Dashboard = () => {
             let new_lg = parseInt(localStorage.getItem('lg')) + new_points
             setLG(new_lg)
             localStorage.setItem('lg', new_lg.toString())
-            axios.put('https://backend-tau-seven-71.vercel.app/lg/' + localStorage.getItem('id'), {"lg":parseInt(new_lg)}).then(() => {
+            axios.put('https://learningo-backend.vercel.app/lg/' + localStorage.getItem('id'), {"lg":parseInt(new_lg)}).then(() => {
                 navigate('/dashboard')
             })
             generate()
