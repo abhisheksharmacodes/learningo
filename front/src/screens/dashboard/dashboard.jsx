@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 import logo from '../../assets/images/logo1.png'
 import menu from '../../assets/images/menu.png'
@@ -14,14 +14,14 @@ import axios from 'axios'
 
 import './dashboard.css'
 
-const API_KEY = 'AIzaSyBLoGQC0Ly4xbc7AVBIcxqWeQ7Lm3scvoo'; // Assuming you've set the API key in .env
+const API_KEY = import.meta.env.REACT_APP_API_KEY
 
 const geminiConfig = {
     temperature: 0.9,
     topP: 1,
     topK: 1,
     maxOutputTokens: 4096,
-};
+}
 
 const Dashboard = () => {
 
@@ -49,9 +49,9 @@ const Dashboard = () => {
     const [change,setChange] = useState(1)
 
     const topic = useRef(null)
-    const buttonRefs = useRef([]);
+    const buttonRefs = useRef([])
 
-    const answer = useRef('');
+    const answer = useRef('')
 
     let navigate = useNavigate()
 
@@ -302,7 +302,7 @@ const Dashboard = () => {
         "Yoruba",
         "Zulu",
         "Zhuang"
-    ];
+    ]
 
     const generate = async () => {
         setAskSomethingElse(false)
@@ -313,10 +313,10 @@ const Dashboard = () => {
             const geminiModel = googleAI.getGenerativeModel({
                 model: "gemini-pro",
                 geminiConfig,
-            });
+            })
 
-            const prompt = `output an array (enclosed in [ and ]. don't put '\`' sign anywhere) of 5 valid json strings (separated by commas) each representing a ${level} level question about ${topics}. questions should be in ${lang} language. question and answer should be in json format as follows: {"question":"question","options":["a","b","c","d"],"answer":""}. the answer should not be in a,b,c,d but from whole option. options should be an array of four strings only. the answer should exactly match letter by letter with one of the options strictly (double check it). then only output the array of 5 json strings. example json output: {"question":"what is computer", "options":["a machine", "a pen", "a box", "a paper"], "answer": "a machine"}`;
-            const result = await geminiModel.generateContent(prompt);
+            const prompt = `output an array (enclosed in [ and ]. don't put '\`' sign anywhere) of 5 valid json strings (separated by commas) each representing a ${level} level question about ${topics}. questions should be in ${lang} language. question and answer should be in json format as follows: {"question":"question","options":["a","b","c","d"],"answer":""}. the answer should not be in a,b,c,d but from whole option. options should be an array of four strings only. the answer should exactly match letter by letter with one of the options strictly (double check it). then only output the array of 5 json strings. example json output: {"question":"what is computer", "options":["a machine", "a pen", "a box", "a paper"], "answer": "a machine"}`
+            const result = await geminiModel.generateContent(prompt)
             const responseText = JSON.parse(result.response.text())
             if (responseText === 'false') {
                 setAskSomethingElse(true)
@@ -329,12 +329,12 @@ const Dashboard = () => {
             }
 
         } catch (error) {
-            console.error("response error", error);
+            console.error("response error", error)
             setTimeout(() => {
                 generate()
             }, 1000)
         }
-    };
+    }
 
     const handleAnswerClick = (option) => {
         // // console.log(`
@@ -351,7 +351,7 @@ const Dashboard = () => {
             buttonRefs.current[option].className = 'option wrong_option'
             buttonRefs.current[answer.current].className = 'option right_option'
         }
-    };
+    }
 
     useEffect(() => {
         checkStatus()
@@ -362,14 +362,14 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (topics) {
-            generate();
+            generate()
         }
-    }, [topics]);
+    }, [topics])
 
     useEffect(() => {
         localStorage.setItem('lang', lang)
         generate()
-    }, [lang]);
+    }, [lang])
 
     useEffect(() => {
         // // console.log('test' + test)
@@ -404,7 +404,7 @@ const Dashboard = () => {
     }, [yourTopics])
 
     const Accordion = ({ title, content }) => {
-        const [isActive, setIsActive] = useState(false);
+        const [isActive, setIsActive] = useState(false)
         return (
             <div className="accordion-item">
                 <div className="accordion-title" onClick={() => setIsActive(!isActive)}>
@@ -413,8 +413,8 @@ const Dashboard = () => {
                 </div>
                 {isActive && <div className="accordion-content">{content}</div>}
             </div>
-        );
-    };
+        )
+    }
 
     const _setLevel = (_level) => {
         setBlurShow(false)
@@ -459,9 +459,9 @@ const Dashboard = () => {
         const geminiModel = googleAI.getGenerativeModel({
             model: "gemini-pro",
             geminiConfig,
-        });
-        const prompt = `it is a sentence "${checkTopic}". output true if 1. if it is  2. it is appropriate and doesn't contain bad words. otherwise false. just output true or false`;
-        const result = await geminiModel.generateContent(prompt);
+        })
+        const prompt = `it is a sentence "${checkTopic}". output true if 1. if it is  2. it is appropriate and doesn't contain bad words. otherwise false. just output true or false`
+        const result = await geminiModel.generateContent(prompt)
         const response = result.response.text()
         // // console.log(response)
         if (response.toString().toLowerCase() !== "false") {
@@ -477,7 +477,7 @@ const Dashboard = () => {
             ], {
                 duration: 400, // Animation duration in milliseconds
                 fill: 'forwards'  // Keep the final state after animation
-            });
+            })
         }
     }
 
@@ -505,7 +505,7 @@ const Dashboard = () => {
                     {leaderboard && leaderboard.map((item)=>{
                         return <li className={(item.email == localStorage.getItem('email') ? 'highlight' : '')} key={item.fname}>
                             <span>
-                            {leaderboard.indexOf(item)+1}. &nbsp;
+                            {leaderboard.indexOf(item)+1}. &nbsp
                             {item.fname}</span>
                             <div><img src={coin} alt="coin" style={{ height: '24px', marginRight: '7px' }} /> {item.lg}</div>
                         </li>
