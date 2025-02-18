@@ -14,7 +14,7 @@ import axios from 'axios'
 
 import './dashboard.css'
 
-const API_KEY = import.meta.env.REACT_APP_API_KEY
+const API_KEY = import.meta.env.VITE_API_KEY
 
 const geminiConfig = {
     temperature: 0.9,
@@ -505,7 +505,7 @@ const Dashboard = () => {
                     {leaderboard && leaderboard.map((item)=>{
                         return <li className={(item.email == localStorage.getItem('email') ? 'highlight' : '')} key={item.fname}>
                             <span>
-                            {leaderboard.indexOf(item)+1}. &nbsp
+                            {leaderboard.indexOf(item)+1}. &nbsp;
                             {item.fname}</span>
                             <div><img src={coin} alt="coin" style={{ height: '24px', marginRight: '7px' }} /> {item.lg}</div>
                         </li>
