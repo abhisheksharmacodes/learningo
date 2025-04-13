@@ -14,7 +14,11 @@ import axios from 'axios'
 
 import './dashboard.css'
 
+<<<<<<< HEAD
 const API_KEY = import.meta.env.VITE_APP_API_KEY
+=======
+const API_KEY = import.meta.env.VITE_API_KEY
+>>>>>>> 40945b3d5aaeb2986996033a23478ad5d59a4ef1
 
 const geminiConfig = {
     temperature: 0.9,
