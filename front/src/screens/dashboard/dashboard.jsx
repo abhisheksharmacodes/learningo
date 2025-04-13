@@ -14,7 +14,7 @@ import axios from 'axios'
 
 import './dashboard.css'
 
-const API_KEY = import.meta.env.REACT_APP_API_KEY
+const API_KEY = import.meta.env.VITE_APP_API_KEY
 
 const geminiConfig = {
     temperature: 0.9,
@@ -311,7 +311,7 @@ const Dashboard = () => {
         try {
             const googleAI = new GoogleGenerativeAI(API_KEY)
             const geminiModel = googleAI.getGenerativeModel({
-                model: "gemini-pro",
+                model: "gemini-2.0-flash",
                 geminiConfig,
             })
 
@@ -457,7 +457,7 @@ const Dashboard = () => {
     const handleCheckTopic = async (checkTopic) => {
         const googleAI = new GoogleGenerativeAI(API_KEY)
         const geminiModel = googleAI.getGenerativeModel({
-            model: "gemini-pro",
+            model: "gemini-2.0-flash",
             geminiConfig,
         })
         const prompt = `it is a sentence "${checkTopic}". output true if 1. if it is  2. it is appropriate and doesn't contain bad words. otherwise false. just output true or false`
@@ -505,7 +505,7 @@ const Dashboard = () => {
                     {leaderboard && leaderboard.map((item)=>{
                         return <li className={(item.email == localStorage.getItem('email') ? 'highlight' : '')} key={item.fname}>
                             <span>
-                            {leaderboard.indexOf(item)+1}. &nbsp
+                            {leaderboard.indexOf(item)+1}. &nbsp;
                             {item.fname}</span>
                             <div><img src={coin} alt="coin" style={{ height: '24px', marginRight: '7px' }} /> {item.lg}</div>
                         </li>

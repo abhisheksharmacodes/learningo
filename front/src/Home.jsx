@@ -3,6 +3,6 @@ import React from "react";
 import Login from "./screens/auth/login/login";
 import Dashboard from "./screens/dashboard/dashboard";
 
-const Home = () => localStorage.getItem('id') ? <Dashboard /> : <Login />
+const Home = () => <Login />
 
 export default Home;
