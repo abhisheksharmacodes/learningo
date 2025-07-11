@@ -31,7 +31,7 @@ An AI-powered platform for mastering concepts through dynamic MCQ practice, pers
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/abhisheksharmacodes/learningo
+git clone https://github.com/abhisheksharmacodes/learningo.git
 cd learningo/front
 npm install
 ```
